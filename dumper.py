@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from os import environ
-from typing import Dict, Mapping, List, Optional
+from typing import Dict, Mapping, List, Optional, Set
 
 Store = Mapping[str, str]
 
@@ -23,10 +23,12 @@ def _parse(file: str) -> Store:
     return parsed
 
 
-def _env_os() -> Store:
+def _env_os(keys: Set[str]) -> Store:
     env_os = {}
 
     for name, value in environ.items():
+        if name not in keys:
+            continue
         env_os[name] = value
 
     return env_os
@@ -39,6 +41,6 @@ def dump(files: List[str], env_os: Optional[bool] = False) -> Dict[str, str]:
         store.update(_parse(file))
 
     if env_os:
-        store.update(_env_os())
+        store.update(_env_os(store.keys()))
 
     return OrderedDict(sorted(store.items()))

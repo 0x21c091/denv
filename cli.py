@@ -28,7 +28,7 @@ def _create_parser() -> argparse.ArgumentParser:
 def main() -> NoReturn:
     args = _create_parser().parse_args()
 
-    dump_vars = dumper.dump(args.file, args.env)
+    dump_vars = dumper.dump(files=args.file, env_os=args.env)
 
     for name, value in dump_vars.items():
         sys.stdout.write(f'{name}={value}\n')
