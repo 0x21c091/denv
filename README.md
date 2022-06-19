@@ -8,27 +8,27 @@ merge two or many files write to dump file `.env.denv`
 python main.py -f .env -f .env.prod > .env.denv
 ```
 
-```text
-# .env
+`.env`
 
+```text
 APP_ENV=local
 USER=local_user
 PASSWORD=local_pass
 COMMON_FOO=foo
 ```
 
-```text
-# .env.prod
+`.env.prod`
 
+```text
 APP_ENV=prod
 USER=prod_user
 PASSWORD=prod_pass
 PROD_BAR=bar
 ```
 
-```text
-# .env.denv
+`.env.denv`
 
+```text
 APP_ENV=prod
 COMMON_FOO=foo
 PASSWORD=prod_pass
@@ -38,16 +38,16 @@ USER=prod_user
 
 ## Advanced Usage
 
-merge two or many files and use `os env` write to dump file `.env.denv`
+merge two or many files and use `os env` with strict mode write to dump file `.env.denv`
 
 ```bash
 export PASSWORD=os_export_pass
-python main.py -f .env -f .env.prod -e > .env.denv
+python main.py -f .env -f .env.prod -e -es > .env.denv
 ```
 
-```text
-# .env.denv
+`.env.denv`
 
+```text
 APP_ENV=prod
 COMMON_FOO=foo
 PASSWORD=os_export_pass
